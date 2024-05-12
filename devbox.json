@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.5/.schema/devbox.schema.json",
+  "packages": [
+    "go@1.22.1",
+    "golangci-lint@1.57.2",
+    "gopls@0.15.2",
+    "delve@1.22.1"
+  ],
+  "shell": {
+    "init_hook": [
+      "go mod vendor",
+      "go mod tidy"
+    ],
+    "scripts": {
+      "build": "go build -C cmd/snake -o ../../out/snake -ldflags \"-s -w\" -buildvcs=false -trimpath"
+    }
+  }
+}
