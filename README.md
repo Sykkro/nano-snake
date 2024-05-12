@@ -11,7 +11,9 @@ A simple Shell Snake game implementation in Go, as a proof-of-concept for a trib
 
 Nano-snake is a playable Snake shell game, backed by a pre-allocated highly compact game board grid. In addition to exploring some of Go language features & capabilities, the main purpose of this project was to experiment with the concept of having a compact and fixed state representation for a Snake game board. 
 
-[![demo](res/demo.gif "demo")<br>(view on asciinema)](https://asciinema.org/a/658992)
+> [![demo](res/demo.gif "demo")](https://asciinema.org/a/658992)
+>
+> (view on [asciinema](https://asciinema.org/a/658992))
 
 ### Controls
 
