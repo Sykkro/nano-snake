@@ -21,8 +21,8 @@ func NewBoard(sd model.Direction, sp ...model.Position) *Board {
 	if len(sp) < 2 {
 		panic("2+ snake positions must be provided")
 	}
-	head := posToByte(sp[0])
-	tail := posToByte(sp[len(sp)-1])
+	head := toByte(sp[0])
+	tail := toByte(sp[len(sp)-1])
 
 	res := &Board{
 		Width:  _width,
@@ -85,24 +85,24 @@ func (b *Board) GetEntityAt(p model.Position) model.Entity {
 }
 
 func (b *Board) GetSnakeHead() model.Entity {
-	return b.GetEntityAt(byteToPos(b.g.head))
+	return b.GetEntityAt(toPos(b.g.head))
 }
 
 func (b *Board) MoveHead(d model.Direction) model.Entity {
 	// 1. get head entity
-	t := b.GetEntityAt(byteToPos(b.g.head))
+	t := b.GetEntityAt(toPos(b.g.head))
 	// 2. update current head direction
 	b.SetEntityAt(t.Pos, model.ENTITY_SNAKE, d)
 	// 3. move head to next pos
 	p := b.GetNextPos(t.Pos, d)
-	b.g.head = posToByte(p)
+	b.g.head = toByte(p)
 	return b.SetEntityAt(p, model.ENTITY_SNAKE, d)
 }
 
 func (b *Board) MoveTail() model.Entity {
-	t := b.GetEntityAt(byteToPos(b.g.tail))
+	t := b.GetEntityAt(toPos(b.g.tail))
 	p := b.GetNextPos(t.Pos, t.Direction)
-	b.g.tail = posToByte(p)
+	b.g.tail = toByte(p)
 	return b.SetEntityAt(t.Pos, model.ENTITY_NONE, model.DIRECTION_NONE /* ANY */)
 }
 
@@ -119,11 +119,11 @@ func (b *Board) DumpEntities() []model.Entity {
 	return res
 }
 
-func posToByte(p model.Position) byte {
+func toByte(p model.Position) byte {
 	return xyToByte(uint8(p.X), uint8(p.Y))
 }
 
-func byteToPos(b byte) model.Position {
+func toPos(b byte) model.Position {
 	x, y := byteToXY(b)
 	return model.Position{X: uint(x), Y: uint(y)}
 }
