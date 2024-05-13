@@ -15,6 +15,10 @@ build:
 	mkdir -p ${BIN}
 	${GO} build -o ${BIN}/snake cmd/snake/main.go ${OPTIONS} 
 
+.PHONY: run
+run: build
+	${BIN}/snake
+
 .PHONY: clean
 clean:
 	rm -rf ${BIN}
