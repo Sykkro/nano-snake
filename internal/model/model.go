@@ -1,5 +1,9 @@
 package model
 
+import (
+	"sykkro/nano-snake/internal/binary"
+)
+
 type Sprite uint
 
 const (
@@ -27,14 +31,23 @@ const (
 	DIRECTION_NONE
 )
 
-type Position struct {
+type Point struct {
 	X uint
 	Y uint
 }
 type Entity struct {
 	Kind      EntityKind
-	Pos       Position
+	Pos       Point
 	Direction Direction
+}
+
+func PointFromByte(b byte) Point {
+	x, y := binary.ByteToXY(b)
+	return Point{X: uint(x), Y: uint(y)}
+}
+
+func (p Point) ToByte() byte {
+	return binary.XyToByte(uint8(p.X), uint8(p.Y))
 }
 
 func (d Direction) GetOpposite() Direction {

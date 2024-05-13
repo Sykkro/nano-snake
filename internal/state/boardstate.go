@@ -1,5 +1,9 @@
 package state
 
+import (
+	"sykkro/nano-snake/internal/binary"
+)
+
 const (
 	// state per [x,y] in the board:
 	// - first bit == snake (0b1**)
@@ -35,10 +39,10 @@ func (g *gamestate) setAt(x uint8, y uint8, v byte) {
 		b := o / 8          // byte offset to work with
 		p := 7 - uint8(o%8) // bit, within byte offset, to manipulate (7..0)
 
-		if hasBit(v, uint8(n)) {
-			g.board[b] = setBit(g.board[b], p)
+		if binary.HasBit(v, uint8(n)) {
+			g.board[b] = binary.SetBit(g.board[b], p)
 		} else {
-			g.board[b] = clearBit(g.board[b], p)
+			g.board[b] = binary.ClearBit(g.board[b], p)
 		}
 	}
 }
@@ -51,8 +55,8 @@ func (g *gamestate) getAt(x uint8, y uint8) byte {
 		b := o / 8          // byte offset to work with
 		p := 7 - uint8(o%8) // bit, within byte offset, to get (7..0)
 
-		if hasBit(g.board[b], p) {
-			r = setBit(r, uint8(n))
+		if binary.HasBit(g.board[b], p) {
+			r = binary.SetBit(r, uint8(n))
 		}
 	}
 	return r

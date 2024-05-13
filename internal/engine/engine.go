@@ -86,7 +86,7 @@ func makeEngine() *engine {
 func (e *engine) newGame(cancel context.CancelFunc) {
 
 	e.nd = model.DIRECTION_UP
-	sp := []model.Position{
+	sp := []model.Point{
 		{X: 8, Y: 6},
 		{X: 8, Y: 7},
 		{X: 8, Y: 8},
